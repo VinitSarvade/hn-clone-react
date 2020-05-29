@@ -1,0 +1,36 @@
+$spaces: (
+  xs: 4px,
+  sm: 8px,
+  md: 12px,
+  lg: 16px,
+  xl: 24px,
+  xxl: 32px,
+);
+
+$sides: left, right, top, bottom;
+
+$types: padding, margin;
+
+@each $type in $types {
+  @each $size, $value in $spaces {
+    .#{(str-slice($type, 0, 1))}-#{$size} {
+      #{$type}: $value;
+    }
+
+    .#{(str-slice($type, 0, 1))}-h-#{$size} {
+      #{$type}-left: $value;
+      #{$type}-right: $value;
+    }
+
+    .#{(str-slice($type, 0, 1))}-v-#{$size} {
+      #{$type}-top: $value;
+      #{$type}-bottom: $value;
+    }
+
+    @each $side in $sides {
+      .#{(str-slice($type, 0, 1))}-#{(str-slice($side, 0, 1))}-#{$size} {
+        #{$type}-#{$side}: $value;
+      }
+    }
+  }
+}

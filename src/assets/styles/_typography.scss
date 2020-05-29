@@ -1,0 +1,35 @@
+$font-sizes: (
+  sm: 8px,
+  md: 12px,
+  xl: 24px,
+);
+
+@each $size, $value in $font-sizes {
+  .txt-#{$size} {
+    font-size: $value;
+  }
+}
+
+$colors: (
+  primary: $primary,
+  dark: #333,
+  light: #828282,
+);
+
+@each $shade, $value in $colors {
+  .txt-#{$shade} {
+    color: $value;
+  }
+}
+
+.txt-center {
+  text-align: center;
+}
+
+$weights: 300 normal 500 bold;
+
+@each $weight in $weights {
+  .font-wt-#{$weight} {
+    font-weight: $weight;
+  }
+}

@@ -1,0 +1,64 @@
+@import "../../assets/styles/colors";
+
+.newsWrapper {
+  margin-top: 24px;
+}
+
+.newsHeader,
+.newsItem {
+  padding: 0.75rem 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 8fr;
+}
+
+.newsHeader {
+  color: #fff;
+  font-weight: 500;
+  background-color: $primary;
+}
+
+.newsItem {
+  .mid {
+    color: darken($primary, 30%);
+    font-weight: 500;
+  }
+  .high {
+    color: $primary;
+    font-weight: 500;
+  }
+
+  .title {
+    text-decoration: none;
+    outline: none;
+    color: inherit;
+  }
+
+  &:nth-child(even) {
+    background-color: #f6f6ef;
+  }
+  &:nth-child(odd) {
+    background-color: #e6e6df;
+  }
+}
+
+.pagination {
+  text-align: right;
+  background-color: #f6f6ef;
+  color: $primary;
+
+  button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+
+  button:first-child {
+    border-right: 2px solid $primary;
+  }
+}
+
+.hideBtn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}

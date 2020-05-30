@@ -2,7 +2,9 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
 import News from "components/news";
-import { getNews, getSource } from "service/api";
+import { getNews, getSource } from "services/api";
+import { getUpvotes, getHiddenItems } from "services/localStorage";
+import { setHiddenItem } from "../../services/localStorage";
 
 const NewsContainer = () => {
   const [news, setNews] = useState([]);
@@ -17,7 +19,7 @@ const NewsContainer = () => {
       return newsItem;
     });
     const withHidenItemRemoved = withUpvotesAdded.filter(
-      (newsItem) => !getStoredHiddenItems().includes(newsItem.objectID)
+      (newsItem) => !getHiddenItems().includes(newsItem.objectID)
     );
     return withHidenItemRemoved;
   }, []);
@@ -51,12 +53,8 @@ const NewsContainer = () => {
   }, [fetchNews, location]);
 
   const getStoredItemUpVotes = (id) => {
-    const upvotes = JSON.parse(localStorage.getItem("upvotes"));
+    const upvotes = getUpvotes;
     return upvotes && upvotes[id] ? upvotes[id] : 0;
-  };
-
-  const getStoredHiddenItems = () => {
-    return JSON.parse(localStorage.getItem("hidden")) || [];
   };
 
   const getPageFromQuery = (query) => {
@@ -88,10 +86,8 @@ const NewsContainer = () => {
   };
 
   const onHide = (id) => {
-    const hiddenItems = new Set(getStoredHiddenItems());
-    hiddenItems.add(id);
-    localStorage.setItem("hidden", JSON.stringify([...hiddenItems]));
-
+    setHiddenItem(id);
+    const hiddenItems = getHiddenItems();
     const newsWithoutHiddenItems = news.filter(
       (newsItem) => !hiddenItems.has(newsItem.objectID)
     );

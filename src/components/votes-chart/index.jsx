@@ -7,7 +7,6 @@ const NewsVotesChart = ({ news }) => {
   const chartData = [
     {
       id: "Votes",
-      color: "hsl(104, 70%, 50%)",
       data: news.map((newsitem) => ({
         x: newsitem.objectID,
         y: newsitem.points,

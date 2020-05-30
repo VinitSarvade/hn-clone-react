@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 
 import styles from "./news.module.scss";
 import NewsItem from "./item";
+import NewsVotesChart from "components/votes-chart";
 
 const News = ({
   news,
@@ -48,6 +49,8 @@ const News = ({
           Next
         </button>
       </div>
+
+      <NewsVotesChart news={news} />
     </div>
   );
 };

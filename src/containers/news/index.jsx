@@ -3,8 +3,8 @@ import { useHistory, useLocation } from "react-router-dom";
 
 import News from "components/news";
 import { getNews, getSource } from "services/api";
-import { getUpvotes, getHiddenItems } from "services/localStorage";
-import { setHiddenItem } from "../../services/localStorage";
+import { getUpvotes, getHiddenItems, setUpvotes } from "services/localStorage";
+import { setHiddenItem } from "services/localStorage";
 
 const NewsContainer = () => {
   const [news, setNews] = useState([]);
@@ -53,7 +53,7 @@ const NewsContainer = () => {
   }, [fetchNews, location]);
 
   const getStoredItemUpVotes = (id) => {
-    const upvotes = getUpvotes;
+    const upvotes = getUpvotes();
     return upvotes && upvotes[id] ? upvotes[id] : 0;
   };
 
@@ -68,14 +68,9 @@ const NewsContainer = () => {
   };
 
   const onUpvote = (id) => {
-    const upvotes = JSON.parse(localStorage.getItem("upvotes"));
-    localStorage.setItem(
-      "upvotes",
-      JSON.stringify({
-        ...upvotes,
-        [id]: upvotes && upvotes[id] ? upvotes[id] + 1 : 1,
-      })
-    );
+    const upvotes = getUpvotes();
+    setUpvotes(id, upvotes && upvotes[id] ? upvotes[id] + 1 : 1);
+
     const upVotedNews = news.map((newsItem) => {
       if (newsItem.objectID === id) {
         newsItem.points += 1;
@@ -89,7 +84,7 @@ const NewsContainer = () => {
     setHiddenItem(id);
     const hiddenItems = getHiddenItems();
     const newsWithoutHiddenItems = news.filter(
-      (newsItem) => !hiddenItems.has(newsItem.objectID)
+      (newsItem) => !hiddenItems.includes(newsItem.objectID)
     );
     setNews(newsWithoutHiddenItems);
   };

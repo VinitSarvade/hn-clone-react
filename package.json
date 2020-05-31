@@ -7,6 +7,12 @@
     "email": "vinit.sarvade.08@gmail.com"
   },
   "dependencies": {
+    "@babel/core": "^7.10.1",
+    "@babel/polyfill": "^7.10.1",
+    "@babel/preset-env": "^7.10.1",
+    "@babel/preset-react": "^7.10.1",
+    "@babel/register": "^7.10.1",
+    "babel-plugin-transform-assets": "^1.0.2",
     "@nivo/line": "^0.61.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -16,6 +22,7 @@
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "helmet": "^3.22.0",
+    "ignore-styles": "^5.0.1",
     "morgan": "^1.10.0",
     "normalize.css": "^8.0.1",
     "react": "^16.13.1",
@@ -47,14 +54,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.10.1",
-    "@babel/polyfill": "^7.10.1",
-    "@babel/preset-env": "^7.10.1",
-    "@babel/preset-react": "^7.10.1",
-    "@babel/register": "^7.10.1",
-    "babel-plugin-transform-assets": "^1.0.2",
     "husky": "^4.2.5",
-    "ignore-styles": "^5.0.1",
     "lint-staged": "^10.2.7",
     "node-sass": "^4.14.1",
     "prettier": "^2.0.5"

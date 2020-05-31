@@ -4,11 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Lighthouse Scores
 
-[lighthouse-mobile]: (https://github.com/VinitSarvade/hn-clone-react/blob/master/public/Screenshot-2020-06-01-12.41.45-AM.png)
-
-<br />
-
-[lighthouse-desktop]: (https://github.com/VinitSarvade/hn-clone-react/blob/master/public/Screenshot-2020-06-01-12.41.29-AM.png)
+|                                                                 Mobile                                                                  |                                                                 Desktop                                                                  |
+| :-------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------: |
+| ![lighthouse-mobile](https://raw.githubusercontent.com/VinitSarvade/hn-clone-react/master/public/Screenshot-2020-06-01-12.41.29-AM.png) | ![lighthouse-desktop](https://raw.githubusercontent.com/VinitSarvade/hn-clone-react/master/public/Screenshot-2020-06-01-12.41.45-AM.png) |
 
 ## Available Scripts
 

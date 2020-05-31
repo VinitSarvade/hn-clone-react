@@ -3,6 +3,7 @@
 @import "./colors";
 @import "./spacing";
 @import "./typography";
+@import "./breakpoints";
 
 * {
   box-sizing: border-box;
@@ -24,12 +25,12 @@ code {
 }
 
 .container {
-  width: 85%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
 
-  @media screen and (max-width: 520px) {
-    width: 100%;
+  @media screen and (min-width: $breakpoint-md-min) {
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 

@@ -38,7 +38,7 @@ const NewsItem = ({
           &#9650;
         </span>
       </div>
-      <div>
+      <div className="news-details">
         <a
           href={url}
           target="_blank"

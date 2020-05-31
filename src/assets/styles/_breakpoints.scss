@@ -1,0 +1,8 @@
+$breakpoints: (
+  sm: 576px,
+  md: 768px,
+);
+
+$breakpoint-md-min: map-get($breakpoints, md);
+$breakpoint-sm-min: map-get($breakpoints, sm);
+$breakpoint-sm-max: map-get($breakpoints, md) - 1px;

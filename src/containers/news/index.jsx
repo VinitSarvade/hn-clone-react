@@ -116,15 +116,17 @@ const NewsContainer = () => {
   };
 
   return (
-    <News
-      handlePageChange={handlePageChange}
-      news={news}
-      totalPages={totalPages}
-      getPageFromQuery={getPageFromQuery}
-      onUpvote={onUpvote}
-      onHide={onHide}
-      loading={loading}
-    />
+    <div className="container">
+      <News
+        handlePageChange={handlePageChange}
+        news={news}
+        totalPages={totalPages}
+        getPageFromQuery={getPageFromQuery}
+        onUpvote={onUpvote}
+        onHide={onHide}
+        loading={loading}
+      />
+    </div>
   );
 };
 

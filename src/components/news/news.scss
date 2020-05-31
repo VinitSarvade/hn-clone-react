@@ -1,20 +1,55 @@
 @import "../../assets/styles/colors";
+@import "../../assets/styles/breakpoints";
 
 .news-wrapper {
-  margin-top: 24px;
+  @media screen and (min-width: $breakpoint-md-min) {
+    margin-top: 24px;
+  }
 }
 
 .news-header,
 .news-item {
-  padding: 0.75rem 1rem;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 8fr;
+  padding: 0.75rem 1rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 38% auto;
+
+  @media screen and (min-width: $breakpoint-md-min) {
+    grid-template-columns: 1fr 1fr 1fr 8fr;
+  }
+
+  @media screen and (min-width: $breakpoint-sm-min) {
+    grid-template-rows: unset;
+  }
+
+  @media screen and (min-width: $breakpoint-sm-min) and (max-width: $breakpoint-sm-max) {
+    grid-template-columns: 1fr 1fr 1fr 5fr;
+  }
+
+  .news-details {
+    grid-column: 1 / -1;
+    border-top: thin dashed #ccc;
+
+    @media screen and (min-width: $breakpoint-sm-min) {
+      grid-column: unset;
+      border-top: none;
+    }
+  }
+
+  & > div {
+    padding: 8px;
+  }
 }
 
 .news-header {
   color: #fff;
   font-weight: 500;
   background-color: $primary;
+  display: none;
+
+  @media screen and (min-width: $breakpoint-sm-min) {
+    display: grid;
+  }
 }
 
 .news-item {

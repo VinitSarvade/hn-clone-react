@@ -21,9 +21,7 @@ const App = (props) => {
         )}
       </Helmet>
       <Navbar />
-      <div className="container">
-        <Routes />
-      </div>
+      <Routes />
     </DataContext.Provider>
   );
 };

@@ -1,23 +1,23 @@
 @import "../../assets/styles/colors";
 
-.newsWrapper {
+.news-wrapper {
   margin-top: 24px;
 }
 
-.newsHeader,
-.newsItem {
+.news-header,
+.news-item {
   padding: 0.75rem 1rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 8fr;
 }
 
-.newsHeader {
+.news-header {
   color: #fff;
   font-weight: 500;
   background-color: $primary;
 }
 
-.newsItem {
+.news-item {
   .mid {
     color: darken($primary, 30%);
     font-weight: 500;
@@ -57,7 +57,7 @@
   }
 }
 
-.hideBtn {
+.hide-btn {
   background-color: transparent;
   border: none;
   outline: none;

@@ -1,7 +1,7 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 
-import styles from "./votes-chart.module.scss";
+import "./votes-chart.scss";
 
 const NewsVotesChart = ({ news }) => {
   const chartData = [
@@ -15,7 +15,7 @@ const NewsVotesChart = ({ news }) => {
   ];
 
   return (
-    <div className={styles.chartContainer}>
+    <div className="chart-container">
       <ResponsiveLine
         data={chartData}
         margin={{ top: 50, right: 60, bottom: 80, left: 60 }}

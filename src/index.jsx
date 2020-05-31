@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 
-import "assets/styles/main.scss";
-import App from "containers/app";
+import "./assets/styles/main.scss";
+import App from "./containers/app";
 import * as serviceWorker from "./serviceWorker";
 
-ReactDOM.render(
+ReactDOM.hydrate(
   <React.StrictMode>
     <BrowserRouter>
       <App />

@@ -1,9 +1,9 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 
-import styles from "./news.module.scss";
+import "./news.scss";
 import NewsItem from "./item";
-import NewsVotesChart from "components/votes-chart";
+import NewsVotesChart from "../../components/votes-chart";
 
 const News = ({
   news,
@@ -16,8 +16,8 @@ const News = ({
   let location = useLocation();
 
   return (
-    <div className={styles.newsWrapper}>
-      <div className={styles.newsHeader}>
+    <div className="news-wrapper">
+      <div className="news-header">
         <div className="txt-center">Comments</div>
         <div className="txt-center">Votes Count</div>
         <div className="txt-center">Upvote</div>
@@ -33,7 +33,7 @@ const News = ({
         />
       ))}
 
-      <div className={`${styles.pagination} p-v-lg`}>
+      <div className="pagination p-v-lg">
         <button
           className={`pointer font-wt-bold p-h-md`}
           onClick={handlePageChange(-1)}

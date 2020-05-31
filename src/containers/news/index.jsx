@@ -1,14 +1,33 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useContext } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
-import News from "components/news";
-import { getNews, getSource } from "services/api";
-import { getUpvotes, getHiddenItems, setUpvotes } from "services/localStorage";
-import { setHiddenItem } from "services/localStorage";
+import News from "../../components/news";
+import { getNews, getSource } from "../../services/api";
+import {
+  getUpvotes,
+  getHiddenItems,
+  setUpvotes,
+  setHiddenItem,
+} from "../../services/localStorage";
+import DataContext from "../app/data-context";
 
 const NewsContainer = () => {
-  const [news, setNews] = useState([]);
-  const [totalPages, setTotalPages] = useState(0);
+  const getInitialState = (dataProviderValue) => {
+    if (dataProviderValue) {
+      return dataProviderValue;
+    }
+    if (window.__INIT_DATA) {
+      const data = window.__INIT_DATA;
+      delete window.__INIT_DATA;
+      return data;
+    }
+    return {};
+  };
+  const contextValue = useContext(DataContext);
+  const initialState = getInitialState(contextValue);
+
+  const [news, setNews] = useState(initialState.hits || []);
+  const [totalPages, setTotalPages] = useState(initialState.totalPages);
 
   let history = useHistory();
   let location = useLocation();
@@ -41,15 +60,19 @@ const NewsContainer = () => {
   );
 
   useEffect(() => {
-    const source = getSource();
-    fetchNews({
-      page: getPageFromQuery(location.search),
-      cancelToken: source.token,
-    });
+    const page = getPageFromQuery(location.search);
+    if (page !== initialState.page) {
+      const source = getSource();
+      fetchNews({
+        page,
+        cancelToken: source.token,
+      });
 
-    return () => {
-      source.cancel();
-    };
+      return () => {
+        source.cancel();
+      };
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchNews, location]);
 
   const getStoredItemUpVotes = (id) => {
@@ -99,6 +122,12 @@ const NewsContainer = () => {
       onHide={onHide}
     />
   );
+};
+
+NewsContainer.getStaticProps = async (req) => {
+  return await getNews({
+    page: req.query && req.query.page ? req.query.page - 1 : null,
+  });
 };
 
 export default NewsContainer;

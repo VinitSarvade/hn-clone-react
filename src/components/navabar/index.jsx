@@ -1,14 +1,14 @@
 import React from "react";
 
-import styles from "./navbar.module.scss";
+import "./navbar.scss";
 
 const Navbar = () => {
   return (
-    <div className={styles.navbarWrapper}>
-      <nav className={styles.navbar}>
+    <div className="navbar-wrapper">
+      <nav className="navbar">
         <div className="container">
-          <a href="/" className={styles.brand}>
-            <div className={styles.logo}>H</div>
+          <a href="/" className="brand">
+            <div className="logo">H</div>
             acker News
           </a>
         </div>

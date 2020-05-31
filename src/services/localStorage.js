@@ -17,7 +17,7 @@ export const getUpvotes = () => {
 };
 
 export const getHiddenItems = () => {
-  return getItemFromLocalStorage("hidden") || {};
+  return getItemFromLocalStorage("hidden") || [];
 };
 
 export const setUpvotes = (id, value) => {

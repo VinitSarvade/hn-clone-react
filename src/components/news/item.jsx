@@ -1,7 +1,7 @@
 import React from "react";
 
-import styles from "./news.module.scss";
-import { getRelativeTime } from "utils/date";
+import "./news.scss";
+import { getRelativeTime } from "../../utils/date";
 
 const NewsItem = ({
   author,
@@ -27,11 +27,10 @@ const NewsItem = ({
   };
 
   const itemUrl = url || story_url ? new URL(url || story_url) : null;
-  const pointsClass =
-    points >= 100 ? styles.high : points >= 50 ? styles.mid : "";
+  const pointsClass = points >= 100 ? "high" : points >= 50 ? "mid" : "";
 
   return (
-    <div className={styles.newsItem}>
+    <div className="news-item">
       <div className="txt-center">{num_comments || 0}</div>
       <div className={`txt-center ${pointsClass}`}>{points || "-"}</div>
       <div className="txt-center txt-light">
@@ -44,7 +43,7 @@ const NewsItem = ({
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className={styles.title}
+          className="title"
         >
           {title || story_title || comment_text || story_text}
         </a>
@@ -65,7 +64,7 @@ const NewsItem = ({
           {getRelativeTime(created_at_i * 1000)}
         </span>
         <button
-          className={`${styles.hideBtn} txt-md pointer txt-light`}
+          className="hide-btn txt-md pointer txt-light"
           onClick={handleHideClick}
         >
           [ <span className="txt-dark">hide</span> ]

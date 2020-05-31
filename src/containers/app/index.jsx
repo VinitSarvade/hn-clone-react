@@ -1,14 +1,17 @@
 import React from "react";
-import { Switch, Route, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
-import NewsContainer from "containers/news";
-import Navbar from "components/navabar";
+import Navbar from "../../components/navabar";
+import Routes from "../../routes";
+import DataContext from "./data-context";
 
-const App = () => {
+const App = (props) => {
   const location = useLocation();
+  const preloadedData = props.data || null;
+
   return (
-    <>
+    <DataContext.Provider value={preloadedData}>
       <Helmet>
         {location && (
           <link
@@ -19,11 +22,9 @@ const App = () => {
       </Helmet>
       <Navbar />
       <div className="container">
-        <Switch>
-          <Route path="/" component={NewsContainer} />
-        </Switch>
+        <Routes />
       </div>
-    </>
+    </DataContext.Provider>
   );
 };
 

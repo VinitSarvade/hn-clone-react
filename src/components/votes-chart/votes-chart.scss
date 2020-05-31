@@ -1,5 +1,7 @@
+@import "../../assets/styles/colors";
+
 .chart-container {
-  background-color: #f6f6ef;
+  background-color: $hn-color-light;
   height: 480px;
-  border-top: 1px inset #e6e6df;
+  border-top: 1px inset $hn-color-darker;
 }

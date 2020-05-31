@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 
 import "./news.scss";
 import NewsItem from "./item";
+import Loader from "../../components/loader";
 import NewsVotesChart from "../../components/votes-chart";
 
 const News = ({
@@ -12,6 +13,7 @@ const News = ({
   getPageFromQuery,
   onUpvote,
   onHide,
+  loading,
 }) => {
   let location = useLocation();
 
@@ -24,33 +26,39 @@ const News = ({
         <div>News Details</div>
       </div>
 
-      {news.map((newsItem) => (
-        <NewsItem
-          {...newsItem}
-          key={newsItem.objectID}
-          onUpvote={onUpvote}
-          onHide={onHide}
-        />
-      ))}
+      {loading && <Loader />}
 
-      <div className="pagination p-v-lg">
-        <button
-          className={`pointer font-wt-bold p-h-md`}
-          onClick={handlePageChange(-1)}
-          disabled={getPageFromQuery(location.search) <= 0}
-        >
-          Prev
-        </button>
-        <button
-          className={`pointer font-wt-bold p-h-md`}
-          onClick={handlePageChange(1)}
-          disabled={totalPages <= getPageFromQuery(location.search) + 1}
-        >
-          Next
-        </button>
-      </div>
+      {!loading && (
+        <>
+          {news.map((newsItem) => (
+            <NewsItem
+              {...newsItem}
+              key={newsItem.objectID}
+              onUpvote={onUpvote}
+              onHide={onHide}
+            />
+          ))}
 
-      <NewsVotesChart news={news} />
+          <div className="pagination p-v-lg">
+            <button
+              className={`pointer font-wt-bold p-h-md`}
+              onClick={handlePageChange(-1)}
+              disabled={getPageFromQuery(location.search) <= 0}
+            >
+              Prev
+            </button>
+            <button
+              className={`pointer font-wt-bold p-h-md`}
+              onClick={handlePageChange(1)}
+              disabled={totalPages <= getPageFromQuery(location.search) + 1}
+            >
+              Next
+            </button>
+          </div>
+
+          <NewsVotesChart news={news} />
+        </>
+      )}
     </div>
   );
 };

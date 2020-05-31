@@ -34,16 +34,16 @@
   }
 
   &:nth-child(even) {
-    background-color: #f6f6ef;
+    background-color: $hn-color-light;
   }
   &:nth-child(odd) {
-    background-color: #e6e6df;
+    background-color: $hn-color-darker;
   }
 }
 
 .pagination {
   text-align: right;
-  background-color: #f6f6ef;
+  background-color: $hn-color-light;
   color: $primary;
 
   button {

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback, useContext } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
 import News from "../../components/news";
+import DataContext from "../app/data-context";
 import { getNews, getSource } from "../../services/api";
 import {
   getUpvotes,
@@ -9,7 +10,6 @@ import {
   setUpvotes,
   setHiddenItem,
 } from "../../services/localStorage";
-import DataContext from "../app/data-context";
 
 const NewsContainer = () => {
   const getInitialState = (dataProviderValue) => {
@@ -28,6 +28,7 @@ const NewsContainer = () => {
 
   const [news, setNews] = useState(initialState.hits || []);
   const [totalPages, setTotalPages] = useState(initialState.totalPages);
+  const [loading, setLoading] = useState(!initialState.hits);
 
   let history = useHistory();
   let location = useLocation();
@@ -46,12 +47,14 @@ const NewsContainer = () => {
   const fetchNews = useCallback(
     async (options) => {
       try {
+        setLoading(true);
         const response = await getNews({
           page: options.page,
           cancelToken: options.cancelToken,
         });
         setNews(enrichWithLocalData(response.hits));
         setTotalPages(response.nbPages);
+        setLoading(false);
       } catch (err) {
         console.error(err);
       }
@@ -120,6 +123,7 @@ const NewsContainer = () => {
       getPageFromQuery={getPageFromQuery}
       onUpvote={onUpvote}
       onHide={onHide}
+      loading={loading}
     />
   );
 };

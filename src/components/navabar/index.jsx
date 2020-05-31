@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./navbar.scss";
+import Logo from "../logo";
 
 const Navbar = () => {
   return (
@@ -8,7 +9,7 @@ const Navbar = () => {
       <nav className="navbar">
         <div className="container">
           <a href="/" className="brand">
-            <div className="logo">H</div>
+            <Logo />
             acker News
           </a>
         </div>

@@ -16,6 +16,7 @@ app.use(
       directives: {
         defaultSrc: ["'self'"],
         connectSrc: ["'self'", "https://hn.algolia.com"],
+        scriptSrc: ["'self'", "'unsafe-inline'"],
       },
     },
   })

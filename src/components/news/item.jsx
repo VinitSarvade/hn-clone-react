@@ -9,9 +9,6 @@ const NewsItem = ({
   num_comments,
   points,
   title,
-  story_text,
-  comment_text,
-  story_title,
   story_url,
   url,
   objectID,
@@ -45,7 +42,7 @@ const NewsItem = ({
           rel="noopener noreferrer"
           className="title"
         >
-          {title || story_title || comment_text || story_text}
+          {title}
         </a>
         {itemUrl && (
           <a

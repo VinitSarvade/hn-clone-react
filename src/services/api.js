@@ -5,7 +5,10 @@ const apiClient = axios.create({
 });
 
 export const getNews = async (options) => {
-  const params = { page: options.page || 0, tags: "story" };
+  const params = {
+    page: options.page && options.page > 0 ? options.page : 0,
+    tags: "story",
+  };
   const response = await apiClient.get("/search", { params });
   return response.data;
 };

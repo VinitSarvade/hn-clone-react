@@ -4,7 +4,7 @@ import { matchPath } from "react-router";
 import { StaticRouter } from "react-router-dom";
 import path from "path";
 import fs from "fs";
-import cheerio from "cheerio";
+import { load } from "cheerio";
 
 import App from "../containers/app";
 import { routePaths } from "../routes";
@@ -21,7 +21,22 @@ const serverRenderer = async (req, res) => {
     let serverData;
     // Check if the component haas defined any static props method to get the data reqired for SSR
     if (matchedRoute.component.getStaticProps) {
-      serverData = await matchedRoute.component.getStaticProps(req);
+      try {
+        serverData = await matchedRoute.component.getStaticProps(req);
+        serverData.hits = serverData.hits.map((hit) => ({
+          author: hit.author,
+          created_t_i: hit.created_at_i,
+          num_comments: hit.num_comments,
+          points: hit.points,
+          title:
+            hit.title || hit.story_title || hit.comment_text || hit.story_text,
+          story_url: hit.story_url,
+          url: hit.url,
+          objectID: hit.objectID,
+        }));
+      } catch {
+        serverData = {};
+      }
     }
 
     const htmlFile = path.resolve(__dirname, "..", "..", "build", "index.html");
@@ -38,10 +53,10 @@ const serverRenderer = async (req, res) => {
       );
 
       const appString = renderToString(applicationRoot);
-      const $ = cheerio.load(html);
+      const $ = load(html);
       $("#root").append(appString);
-      $("head").append(
-        `<script>window.__INIT_DATA = ${JSON.stringify(serverData)}</script>`
+      $("#preload").append(
+        `window.__PRELOADED_DATA__ = ${JSON.stringify(serverData)};`
       );
       return res.send($.html());
     });

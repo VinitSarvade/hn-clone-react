@@ -6,10 +6,13 @@ import "./assets/styles/main.scss";
 import App from "./containers/app";
 import * as serviceWorker from "./serviceWorker";
 
+const preloadedData = window.__PRELOADED_DATA__ || null;
+delete window.__PRELOADED_DATA__;
+
 ReactDOM.hydrate(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <App data={preloadedData} />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

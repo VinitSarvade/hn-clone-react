@@ -12,23 +12,11 @@ import {
 } from "../../services/localStorage";
 
 const NewsContainer = () => {
-  const getInitialState = (dataProviderValue) => {
-    if (dataProviderValue) {
-      return dataProviderValue;
-    }
-    if (window.__INIT_DATA) {
-      const data = window.__INIT_DATA;
-      delete window.__INIT_DATA;
-      return data;
-    }
-    return {};
-  };
-  const contextValue = useContext(DataContext);
-  const initialState = getInitialState(contextValue);
+  const initialState = useContext(DataContext);
 
-  const [news, setNews] = useState(initialState.hits || []);
-  const [totalPages, setTotalPages] = useState(initialState.totalPages);
-  const [loading, setLoading] = useState(!initialState.hits);
+  const [news, setNews] = useState(initialState?.hits || []);
+  const [totalPages, setTotalPages] = useState(initialState?.nbPages || 0);
+  const [loading, setLoading] = useState(!initialState?.hits);
 
   let history = useHistory();
   let location = useLocation();
@@ -49,14 +37,15 @@ const NewsContainer = () => {
       try {
         setLoading(true);
         const response = await getNews({
-          page: options.page,
+          page: options.page > 0 ? options.page : 1,
           cancelToken: options.cancelToken,
         });
         setNews(enrichWithLocalData(response.hits));
         setTotalPages(response.nbPages);
         setLoading(false);
       } catch (err) {
-        console.error(err);
+        setNews(enrichWithLocalData([]));
+        setLoading(false);
       }
     },
     [enrichWithLocalData]
@@ -64,7 +53,7 @@ const NewsContainer = () => {
 
   useEffect(() => {
     const page = getPageFromQuery(location.search);
-    if (page !== initialState.page) {
+    if (page !== initialState?.page) {
       const source = getSource();
       fetchNews({
         page,

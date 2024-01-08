@@ -10,7 +10,16 @@ const app = express();
 
 app.use(compression());
 app.use(morgan("combined"));
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        connectSrc: ["'self'", "https://hn.algolia.com"],
+      },
+    },
+  })
+);
 
 app.use("^/$", serverRenderer);
 app.use(

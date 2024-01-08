@@ -26,9 +26,9 @@ const News = ({
         <div>News Details</div>
       </div>
 
-      {loading && <Loader />}
+      {loading && news.length === 0 && <Loader />}
 
-      {!loading && (
+      {news.length > 0 && (
         <>
           {news.map((newsItem) => (
             <NewsItem
